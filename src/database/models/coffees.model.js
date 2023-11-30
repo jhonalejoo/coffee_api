@@ -1,19 +1,12 @@
 const { Model, DataTypes } = require('sequelize')
-
-const COFFEE_TABLE = 'coffees'
+const sequelize = require('../../libs/sequelize')
 
 class Coffee extends Model {
-   static config(sequelize) {
-      return {
-         sequelize,
-         tableName: COFFEE_TABLE,
-         modelName: 'Coffee',
-         timestamps: true
-      }
-   }
+   
 }
 
-const CoffeeSchema = {
+Coffee.init(
+   {
    id: {
       allowNull: false,
       autoIncrement: true,
@@ -30,6 +23,10 @@ const CoffeeSchema = {
       type: DataTypes.STRING,
       field: 'image'
    }
-}
+},{
+   sequelize,
+   timestamps: true,
+   modelName:'coffee'
+})
 
-module.exports = { Coffee, CoffeeSchema }
+module.exports = Coffee

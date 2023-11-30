@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const sequelize = require('./libs/sequelize');
 
 dotenv.config()
 
@@ -17,3 +18,5 @@ app.use(express.json())
 routerApi(app)
 app.get('/', (req, res) => res.send('Api Coffee!'))
 app.listen(port, () => console.log(`Port ==> ${port}!`))
+
+sequelize.sync()
