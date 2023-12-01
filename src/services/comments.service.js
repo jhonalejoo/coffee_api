@@ -1,3 +1,4 @@
+const Coffee = require('../database/models/coffees.model');
 const Comment = require('../database/models/comments.models')
 
 class CommentService {
@@ -5,7 +6,9 @@ class CommentService {
 
     }
     async find() {
-        const res = await Comment.findAll()
+        const res = await Comment.findAll(
+            {include: [{ model: Coffee,attributes: ['name'] }]}
+        )
         return res
     }
     async findOne(id) {
@@ -13,7 +16,12 @@ class CommentService {
         return res;
     }
     async create(data) {
-        const res = await Comment.create(data)
+        const newComment = await Comment.create(data);
+        const res = await Comment.findOne({
+            where: { id: newComment.id },
+            include: [{ model: Coffee, attributes: ['name'] }],
+          });
+      
         return res
     }
     async update(id, data) {

@@ -28,7 +28,7 @@ Comment.init({
         type: DataTypes.INTEGER,
         field: 'phone_user'
     },
-    Comment: {
+    comment: {
         allowNull: false,
         type: DataTypes.STRING,
         field: 'comment'
@@ -41,5 +41,6 @@ Comment.init({
 
 
 Comment.belongsTo(Coffee,{foreignKey: 'coffe_id'})
+
 
 module.exports = Comment
